@@ -1,0 +1,159 @@
+За семестр я изучил работу со словарями, множествами, кортежами, функциями, функциями(zip, filter, map, lambda, open, isinstance,all,any), конструкцию match/case, базово модуль random, классы и объекты, атрибуты классов и объектов, методы классов и параметр self.
+https://stepik.org/course/100707/syllabus Ссылка на курс Добрый, добрый Python с Сергеем Балакиревым
+Выполненные задачи из курса Добрый, добрый Python ООП - обучающий курс от Сергея Балакирева
+https://stepik.org/lesson/701974/step/7?unit=702075
+class Graph:
+    LIMIT_Y = [0, 10]
+    def set_data(self, data):
+        self.data = data
+    def draw(self):
+        lst= []
+        for i in self.data:
+            if self.LIMIT_Y[0] <= i <= self.LIMIT_Y[1]:
+                lst.append(i)
+        print(*lst)
+graph_1 = Graph()
+graph_1.set_data([10, -5, 100, 20, 0, 80, 45, 2, 5, 7])
+graph_1.draw()
+
+https://stepik.org/lesson/701974/step/6?unit=702075
+class MediaPlayer:
+    
+    def open(self, file):
+        self.filename = file
+    def play(self):
+        print(f"Воспроизведение {self.filename}")
+
+media1 = MediaPlayer()
+media2 = MediaPlayer()
+
+media1.open("filemedia1")
+media2.open("filemedia2")
+
+media1.play()
+media2.play()
+
+https://stepik.org/lesson/701974/step/9?unit=702075
+import sys
+
+# здесь объявляется класс StreamData
+class StreamData:
+    def create(self, fields, lst_values):
+        if len(fields) == len(lst_values):
+            self.__dict__ = dict(zip(fields, lst_values))
+            return True
+        else:
+            return False
+class StreamReader:
+    FIELDS = ('id', 'title', 'pages')
+
+    def readlines(self):
+        lst_in = list(map(str.strip, sys.stdin.readlines()))  # считывание списка строк из входного потока
+        sd = StreamData()
+        res = sd.create(self.FIELDS, lst_in)
+        return sd, res
+
+
+sr = StreamReader()
+data, result = sr.readlines()
+
+https://stepik.org/lesson/701974/step/11?unit=702075
+import sys
+
+# программу не менять, только добавить два метода
+lst_in = list(map(str.strip, sys.stdin.readlines()))  # считывание списка строк из входного потока
+
+
+class DataBase:
+    lst_data = []
+    FIELDS = ('id', 'name', 'old', 'salary')
+    def insert(self, data):
+        for i in data:
+            self.lst_data.append(dict(zip(self.FIELDS, i.split())))
+
+    def select(self, a, b):
+        if b < len(self.lst_data):
+            return self.lst_data[a: b+1]
+        else:
+            return self.lst_data[a:]
+    # здесь добавлять методы
+
+
+db = DataBase()
+db.insert(lst_in)
+
+https://stepik.org/lesson/701973/step/5?unit=702074
+class DataBase:
+    pk = 1
+    title = "Классы и объекты"
+    author = "Сергей Балакирев"
+    views = 14356
+    comments = 12
+
+https://stepik.org/lesson/701973/step/6?unit=702074
+class Goods:
+    title = "Мороженое"
+    weight = 154
+    tp = "Еда"
+    price = 1024
+setattr(Goods, 'price', 2048)
+setattr(Goods, 'inflation', 100)
+
+https://stepik.org/lesson/701973/step/7?unit=702074
+class Car:
+    pass
+
+setattr(Car, 'model', "Тойота")
+setattr(Car, 'color', "Розовый")
+setattr(Car, 'number', "П111УУ77")
+
+print(Car.__dict__['color'])
+
+https://stepik.org/lesson/701973/step/8?unit=702074
+class Notes:
+    uid = 1005435
+    title = "Шутка"
+    author = "И.С. Бах"
+    pages = 2
+print(getattr(Notes, 'author'))
+
+https://stepik.org/lesson/701973/step/9?unit=702074
+class Dictionary:
+    rus = "Питон"
+    eng = "Python"
+print(getattr(Dictionary, 'rus_word', False))
+
+https://stepik.org/lesson/701973/step/10?unit=702074
+class TravelBlog:
+    total_blogs = 0 
+tb1 = TravelBlog()
+setattr(tb1, 'name', 'Франция')
+setattr(tb1, 'days', 6)
+TravelBlog.total_blogs = 1
+tb2 = TravelBlog()
+setattr(tb2, 'name', 'Италия')
+setattr(tb2, 'days', 5)
+TravelBlog.total_blogs = 2
+
+https://stepik.org/lesson/701973/step/11?unit=702074
+class Figure:
+    type_fig = 'ellipse'
+    color = 'red' 
+fig1 = Figure()
+setattr(fig1, 'start_pt', (10, 5))
+setattr(fig1, 'end_pt', (100, 20))
+setattr(fig1, 'color', 'blue')
+hasattr(fig1, 'color')
+delattr(fig1, 'color')
+print(*fig1.__dict__)
+
+https://stepik.org/lesson/701973/step/12?unit=702074
+class Person:
+    name = 'Сергей Балакирев'
+    job = 'Программист'
+    city = 'Москва'  
+p1 = Person()
+if 'job' in p1.__dict__:
+    print("True")
+else:
+    print("False")
